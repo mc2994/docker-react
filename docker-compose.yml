@@ -1,0 +1,24 @@
+version: "3"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      # - .:/app  // shared drive should be enabled in docker settings. all code change will reflect automatically in container
+  
+  #service for automated testing og react app
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      # - .:/app  // shared drive should be enabled in docker settings. all code change will reflect automatically in container
+    command:  ["npm", "run", "test"]
+  
